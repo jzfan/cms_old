@@ -17,8 +17,12 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
+        // if($request->input('email') == 'admin@admin.com')
+        // {
+        //     return redirect('/admin');
+        // }
         if (Auth::guard($guard)->check()) {
-            return redirect('/');
+            return redirect('/admin');
         }
 
         return $next($request);
