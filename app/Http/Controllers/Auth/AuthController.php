@@ -30,8 +30,6 @@ class AuthController extends Controller
      */
     protected $redirectTo = '/admin';
 
-    protected $guard = 'admin';
-
     /**
      * Create a new authentication controller instance.
      *
