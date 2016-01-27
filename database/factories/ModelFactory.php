@@ -11,19 +11,21 @@
 |
 */
 
-// $factory->define(App\User::class, function (Faker\Generator $faker) {
-//     return [
-//         'name' => $faker->name,
-//         'email' => $faker->email,
-//         'password' => bcrypt(str_random(10)),
-//         'remember_token' => str_random(10),
-//     ];
-// });
-
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
-        'name' => 'jzfan',
-        'email' => 'admin@admin.com',
-        'password' => bcrypt('123'),
+        'name' => $faker->name,
+        'email' => $faker->email,
+        'role_id' => 0,
+        'password' => bcrypt(str_random(10)),
+        'remember_token' => str_random(10),
     ];
 });
+
+// $factory->define(App\User::class, function (Faker\Generator $faker) {
+//     return [
+//         'name' => 'test',
+//         'email' => 'test@test.com',
+//         'role_id' => 0,
+//         'password' => bcrypt('123'),
+//     ];
+// });
