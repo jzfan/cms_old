@@ -18,10 +18,10 @@
                             <a href="/admin/user">列表</a>
                         </li>
                         <li>
-                            <a href="#">角色</a>
+                            <a href="/admin/role">角色</a>
                         </li>
                         <li>
-                            <a href="#">权限</a>
+                            <a href="/admin/perm">权限</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level --> </li>

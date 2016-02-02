@@ -2,10 +2,10 @@
 
 namespace App\DataTables;
 
-use App\User;
+use App\Permission;
 use Yajra\Datatables\Services\DataTable;
 
-class UsersDataTable extends DataTable
+class PermissionsDataTable extends DataTable
 {
     // protected $printPreview  = 'path.to.print.preview.view';
 
@@ -18,7 +18,7 @@ class UsersDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', 'admin.user.td')
+            ->addColumn('action', 'admin.permission.td')
             ->make(true);
     }
 
@@ -29,10 +29,10 @@ class UsersDataTable extends DataTable
      */
     public function query()
     {
-        $users = User::with('role');
+        $permissions = Permission::select();
 
-        return $this->applyScopes($users);
 
+        return $this->applyScopes($permissions);
     }
 
     /**
@@ -40,13 +40,12 @@ class UsersDataTable extends DataTable
      *
      * @return \Yajra\Datatables\Html\Builder
      */
-
     public function html()
     {
         return $this->builder()
-            ->columns($this->getColumns())
-            ->addAction(['width' => '120px', 'title'=>'操作'])
-            ->parameters($this->getBuilderParameters());
+                    ->columns($this->getColumns())
+                    ->addAction(['width' => '120px'])
+                    ->parameters($this->getBuilderParameters());
     }
 
     /**
@@ -59,12 +58,11 @@ class UsersDataTable extends DataTable
         return [
             'id'=>['title'=>'ID'],
             'name'=>['title'=>'名字'],
-            'email',
-            'role'=>['data'=> 'role.name', 'title'=>'角色'],
             'created_at'=>['title'=>'创建于'],
             'updated_at'=>['title'=>'更新于']
         ];
     }
+
     /**
      * Get filename for export.
      *
@@ -72,6 +70,6 @@ class UsersDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'users';
+        return 'permissions';
     }
 }

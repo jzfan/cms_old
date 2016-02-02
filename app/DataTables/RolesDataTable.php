@@ -2,10 +2,10 @@
 
 namespace App\DataTables;
 
-use App\User;
+use App\Role;
 use Yajra\Datatables\Services\DataTable;
 
-class UsersDataTable extends DataTable
+class RolesDataTable extends DataTable
 {
     // protected $printPreview  = 'path.to.print.preview.view';
 
@@ -18,7 +18,7 @@ class UsersDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', 'admin.user.td')
+            ->addColumn('action', 'admin.role.td')
             ->make(true);
     }
 
@@ -29,10 +29,17 @@ class UsersDataTable extends DataTable
      */
     public function query()
     {
-        $users = User::with('role');
 
-        return $this->applyScopes($users);
+        $roles = Role::select([
+            'roles.id',
+            'roles.name',
+            \DB::raw('count(users.role_id) as count'),
+            'roles.created_at',
+            'roles.updated_at'
+        ])->join('users','users.role_id','=','roles.id')
+        ->groupBy('users.role_id');
 
+        return $this->applyScopes($roles);
     }
 
     /**
@@ -40,7 +47,6 @@ class UsersDataTable extends DataTable
      *
      * @return \Yajra\Datatables\Html\Builder
      */
-
     public function html()
     {
         return $this->builder()
@@ -59,12 +65,13 @@ class UsersDataTable extends DataTable
         return [
             'id'=>['title'=>'ID'],
             'name'=>['title'=>'名字'],
-            'email',
-            'role'=>['data'=> 'role.name', 'title'=>'角色'],
+            'count'=>['title'=>'人数'],
             'created_at'=>['title'=>'创建于'],
             'updated_at'=>['title'=>'更新于']
         ];
     }
+
+
     /**
      * Get filename for export.
      *
@@ -72,6 +79,6 @@ class UsersDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'users';
+        return 'roles';
     }
 }

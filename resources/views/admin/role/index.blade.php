@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    @include('admin.partial.datatable', ['head'=>'用户列表', 'path'=>'user'])
+    @include('admin.partial.datatable', ['head'=>'用户角色', 'path'=>'role'])
 
 @endsection
 

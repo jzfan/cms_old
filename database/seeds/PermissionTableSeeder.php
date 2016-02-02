@@ -11,6 +11,6 @@ class PermissionTableSeeder extends Seeder
      */
     public function run()
     {
-    	factory('App\Permission', 20)->create();
+    	factory('App\Permission', 12)->create();
     }
 }

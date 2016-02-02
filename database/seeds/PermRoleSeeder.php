@@ -18,18 +18,10 @@ class PermRoleSeeder extends Seeder
         foreach($roles_id as $rid){
         	// $arr = $perms_id;
         	shuffle($perms_id);
-        	$count = count($perms_id);
-        	$offset = mt_rand(1, $count-1);
-        	$arr = array_slice($perms_id, $offset);
+        	$offset = mt_rand(1, 4);
+        	$arr = array_slice($perms_id, 0, $offset);
 
         	Role::find($rid)->permissions()->sync($arr);
-        	// for ( $i=1; $i<$m; $i++) {
-        	// 	# code...
-        	// 	\DB::table('permission_role')->insert([
-        	// 		'permission_id' => array_shift($arr),
-        	// 		'role_id'       => $rid
-        	// 		]);
-        	// }
         }
     }
 

@@ -52,7 +52,7 @@
         className: 'buttons-print',
 
         text: function (dt) {
-            return  '<i class="fa fa-print"></i> ' + dt.i18n('buttons.print', 'Print');
+            return  '<i class="fa fa-print"></i> ' + dt.i18n('buttons.print', '打印');
         },
 
         action: function (e, dt, button, config) {
@@ -77,7 +77,7 @@
         className: 'buttons-reload',
 
         text: function (dt) {
-            return '<i class="fa fa-refresh"></i> ' + dt.i18n('buttons.reload', 'Reload');
+            return '<i class="fa fa-refresh"></i> ' + dt.i18n('buttons.reload', '刷新');
         },
 
         action: function (e, dt, button, config) {
@@ -89,7 +89,7 @@
         className: 'buttons-create',
 
         text: function (dt) {
-            return '<i class="fa fa-plus"></i> ' + dt.i18n('buttons.create', 'Create');
+            return '<i class="fa fa-plus"></i> ' + dt.i18n('buttons.create', '新增');
         },
 
         action: function (e, dt, button, config) {
