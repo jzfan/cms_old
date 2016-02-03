@@ -18,15 +18,32 @@
               <form class="form-horizontal" action='/admin/user/{{ $user->id }}' method="POST">
               {{ csrf_field() }}
               <input type="hidden" name='_method' value='PUT'>
-                <div class="form-group">
+                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                   <label class="col-sm-2 control-label">名字</label>
                   <div class="col-sm-10">
-                    <input type="text" name='name' class="form-control" value='{{ $user->name }}'></div>
+                    <input type="text" name='name' class="form-control" value=
+@if ($errors->has('name'))
+                    '{{ old('name') }}'
+@else
+                    '{{ $user->name }}'
+                    @endif
+                    >
+
+                    @include('errors.ifHas', ['key'=>'name'])
+                    </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                   <label class="col-sm-2 control-label">email</label>
                   <div class="col-sm-10">
-                    <input type="email" name='email' class="form-control" value='{{ $user->email }}'></div>
+                    <input type="email" name='email' class="form-control" value=
+                    @if ($errors->has('email'))
+                    '{{ old('email') }}'
+@else
+                    '{{ $user->email }}'
+                    @endif
+                    >
+ @include('errors.ifHas', ['key'=>'email'])
+                    </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">角色</label>
@@ -44,14 +61,17 @@
                   </div>
 
                 </div>
-                <div class="form-group">
+                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                   <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
                   <div class="col-sm-10">
-                    <input type="password" name='password' class="form-control" placeholder="不修改请留空！"></div>
+                    <input type="password" name='password' class="form-control" placeholder="不修改请留空！">
+   @include('errors.ifHas', ['key'=>'password'])
+                    </div>
                 </div>
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">提交</button>
+                    <a href='javascript:history.back()' class="btn btn-default">返回</a>
+                    <button type="submit" class="btn btn-primary">提交</button>
                   </div>
                 </div>
               </form>

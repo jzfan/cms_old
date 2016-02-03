@@ -12,12 +12,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        \DB::statement("SET foreign_key_checks = 0");
+    	\DB::table('users')->truncate();
+    	\DB::table('permission_role')->truncate();
+        \DB::table('permissions')->truncate();
+        \DB::table('roles')->truncate();
 
-    	\DB::table('users')->delete();
-    	\DB::table('roles')->delete();
-    	\DB::table('permissions')->delete();
-    	\DB::table('permission_role')->delete();
-
+        \DB::table('roles')->insert(['name'=>'无']);
         $role = \DB::table('roles')->insertGetId(['name'=>'superman']);
     	\DB::table('users')->insert(
     		['name'=>'test', 'email'=>'test@test.com', 'role_id'=>$role, 'password'=>bcrypt('123')]
@@ -28,6 +29,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleTableSeeder::class);
         $this->call(PermissionTableSeeder::class);
         $this->call(PermRoleSeeder::class);
-
+        \DB::statement("SET foreign_key_checks =1");
     }
 }

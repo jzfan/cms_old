@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
 use App\DataTables\UsersDataTable;
-use Illuminate\Http\Request;
+use App\Http\Requests\UserEditRequest;
 
 class UserController extends Controller
 {
@@ -21,7 +21,7 @@ class UserController extends Controller
     	return view('admin.user.edit', compact('user', 'roles'));
     }
 
-    public function update(User $user, Request $request)
+    public function update(User $user, UserEditRequest $request)
     {
         $user->update($request->input());
         return redirect('/admin/user');

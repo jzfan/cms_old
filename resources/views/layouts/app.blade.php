@@ -16,6 +16,8 @@
 <div id="wrapper">
     
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+<div class="container">
+    
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -25,10 +27,11 @@
         </button>
         <a class="navbar-brand" href="index.html">LARA_CMS Admin v1.0</a>
     </div>
-    <!-- /.navbar-header -->
-
-
-    <!-- /.navbar-top-links -->
+<p class="navbar-text navbar-right">
+<a href="/login" class="navbar-link">登录</a>
+<a href="/register" class="navbar-link">注册</a>
+</p>
+</div>
 
     </nav>
     <br>

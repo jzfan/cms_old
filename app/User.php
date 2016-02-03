@@ -32,6 +32,11 @@ class User extends Authenticatable
 
     protected function setPasswordAttribute($value)
     {
-        $this->attributes['password'] = bcrypt($value);
+        return bcrypt($value);
+    }
+
+    protected function getRoleIdAttribute($value)
+    {
+        return  empty($value) ? 1 : $value ;
     }
 }

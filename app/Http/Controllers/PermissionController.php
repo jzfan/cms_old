@@ -14,16 +14,15 @@ class PermissionController extends Controller
 		return $datatable->render('admin.Permission.index');
 	}
 
-    public function edit(Permission $Permission)
+    public function edit(Permission $perm)
     {
-    	return view('admin.Permission.edit', compact('Permission'));
+    	return view('admin.Permission.edit', compact('perm'));
     }
 
-    public function update(Permission $Permission, Request $request)
+    public function update(Permission $perm, Request $request)
     {
-
-    	$Permission->update($request->input());
-    	return redirect('/admin/Permission');
+    	$perm->update($request->input());
+    	return redirect('/admin/perm');
     }
 
     public function destroy($id)

@@ -34,6 +34,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin', 'AdminController@index');
     Route::resource('/admin/user', 'UserController', ['except'=>'show']);
     Route::resource('/admin/role', 'RoleController', ['except'=>'show']);
-    Route::get('/admin/perm', 'PermissionController@index');
+    Route::resource('/admin/perm', 'PermissionController', ['except'=>'show']);
     // Route::resource('/admin/perm', 'PermissionController', ['except'=>'show']);
 });
