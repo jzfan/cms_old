@@ -35,5 +35,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('/admin/user', 'UserController', ['except'=>'show']);
     Route::resource('/admin/role', 'RoleController', ['except'=>'show']);
     Route::resource('/admin/perm', 'PermissionController', ['except'=>'show']);
+    Route::resource('/admin/category', 'CategoryController', ['except'=>'show']);
     // Route::resource('/admin/perm', 'PermissionController', ['except'=>'show']);
 });
+
+
+Route::get('test', 'IndexController@test');

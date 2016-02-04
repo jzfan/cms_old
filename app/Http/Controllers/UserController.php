@@ -27,10 +27,11 @@ class UserController extends Controller
         return redirect('/admin/user');
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        User::findOrFail($id)->delete();
-    	return $id;
+        $name = $user->name;
+        $user->delete();
+    	return $name;
     }
 
     public function create(){

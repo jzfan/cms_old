@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleTableSeeder::class);
         $this->call(PermissionTableSeeder::class);
         $this->call(PermRoleSeeder::class);
+        $this->call(CategorySeeder::class);
         \DB::statement("SET foreign_key_checks =1");
     }
 }

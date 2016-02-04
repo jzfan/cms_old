@@ -26,9 +26,9 @@
                     </ul>
                     <!-- /.nav-second-level --> </li>
                 <li>
-                    <a href="tables.html">
-                        <i class="fa fa-table fa-fw"></i>
-                        Tables
+                    <a href="/admin/category">
+                        <i class="fa fa-list fa-fw"></i>
+                        分类
                     </a>
                 </li>
                 <li>

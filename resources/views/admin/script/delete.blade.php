@@ -6,14 +6,12 @@
         var row = $(obj).parents('tr');
         var form = $('#form_del');
         var url = form.attr('action').replace(':ID', id);
-        var data = form.serialize();
-        
-
-            row.fadeOut();
+        var data = form.serialize();        
+        row.fadeOut();
         $.post(url, data, function(result){
-            $('.alert').addClass('alert-success').append('<strong>ID:' + result + ' 删除成功！</strong>').show();
+            $('.alert').addClass('alert-success').html('<strong>' + result + ' 删除成功！</strong>').show();
         }).fail(function () {
-            $('.alert').addClass('alert-danger').append('<strong>ID:' + id + ' 删除失败！！</strong>').show();
+            $('.alert').addClass('alert-danger').html('<strong>ID:' + id + ' 删除失败！！</strong>').show();
             row.fadeIn();
         });
     }

@@ -15,37 +15,35 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-              <form class="form-horizontal" action='/admin/role/{{ $role->
-                id }}' method="POST">
+              <form class="form-horizontal" action='/admin/role' method="POST">
               {{ csrf_field() }}
-                <input type="hidden" name='_method' value='PUT'>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">名字</label>
                   <div class="col-sm-10">
                     <input type="text" name='name' class="form-control" value='{{ $role->name }}'></div>
                 </div>
 
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">权限</label>
-                  @foreach ($permissions as $key => $perm)
-                  <div class="col-sm-3 
+  <div class="form-group">
+    <label class="col-sm-2 control-label">权限</label>
+    @foreach ($permissions as $key => $perm)
+      
+      <div class="col-sm-3 
         @if($key%3 == 0 && $key != 0)
           col-sm-offset-2
         @endif
       ">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" 
-              @if(in_array($perm->
-                        id, $role->permissions()->lists('id')->toArray()))
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" 
+              @if(in_array($perm->id, $role->permissions()->lists('id')->toArray()))
                 checked='true' 
               @endif
               name='permissions[]' value='{{ $perm->id }}'>{{ $perm->name }}
-                      </label>
-                    </div>
-                  </div>
-                  @endforeach
-                </div>
+            </label>
+          </div>
+        </div>
+    @endforeach
+  </div>
 
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">

@@ -15,6 +15,19 @@ class RoleController extends Controller
     	return $datatable->render('admin.role.index');
     }
 
+    public function create(Role $role)
+    {
+        $permissions = Permission::all();
+        return view('admin.role.create', compact('role', 'permissions'));
+    }
+
+    public function store(Request $request)
+    {
+        $role = Role::create($request->input());
+        dd($role);
+        return redirect('/admin/role');
+    }
+
     public function edit(Role $role)
     {
         $permissions = Permission::all();
@@ -28,9 +41,10 @@ class RoleController extends Controller
     	return redirect('/admin/role');
     }
 
-    public function destroy($id)
+    public function destroy(Permission $permission)
     {
-        Role::findOrFail($id)->delete();
-        return $id;
-    }   
+        $name = $permission->name;
+        $permission->delete();
+        return $name;
+    }
 }

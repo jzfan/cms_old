@@ -16,7 +16,8 @@ class RolesDataTable extends DataTable
      */
     public function ajax()
     {
-        return $this->datatables
+        return $this->
+datatables
             ->eloquent($this->query())
             ->addColumn('action', 'admin.role.td')
             ->make(true);
@@ -34,11 +35,11 @@ class RolesDataTable extends DataTable
             'roles.id',
             'roles.name',
             \DB::raw('count(users.role_id) as count'),
-            \DB::raw('count(permission_role.permission_id) as count2'),
+            // \DB::raw('count(permission_role.permission_id) as count2'),
             'roles.created_at',
             'roles.updated_at'
-        ])->join('users','users.role_id','=','roles.id')
-          ->join('permission_role','permission_role.role_id','=','roles.id')
+        ])->leftJoin('users','users.role_id','=','roles.id')
+          // ->join('permission_role','permission_role.role_id','=','roles.id')
         ->groupBy('users.role_id');
 
         return $this->applyScopes($roles);
@@ -68,12 +69,11 @@ class RolesDataTable extends DataTable
             'id'=>['title'=>'ID'],
             'name'=>['title'=>'名字'],
             'count'=>['title'=>'人数'],
-            'count2'=>['title'=>'权限数'],
+            // 'count2'=>['title'=>'权限数'],
             'created_at'=>['title'=>'创建于'],
             'updated_at'=>['title'=>'更新于']
         ];
     }
-
 
     /**
      * Get filename for export.

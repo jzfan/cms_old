@@ -39,3 +39,13 @@ $factory->define(App\Permission::class, function (Faker\Generator $faker){
 		'name'=> $faker->word
 	];
 });
+
+$factory->define(App\Category::class, function (Faker\Generator $faker){
+    $colors = ['default', 'info', 'success', 'danger', 'warning'];
+    return [
+        'name'=> $faker->word,
+        'description'=> $faker->sentence,
+        'color'=> $colors[array_rand($colors)],
+    ];
+});
+
