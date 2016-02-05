@@ -14,5 +14,7 @@
             $('.alert').addClass('alert-danger').html('<strong>ID:' + id + ' 删除失败！！</strong>').show();
             row.fadeIn();
         });
+        //重载 table
+        $('.buttons-reload').click();
     }
 </script>

@@ -24,7 +24,6 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $role = Role::create($request->input());
-        dd($role);
         return redirect('/admin/role');
     }
 
@@ -37,14 +36,16 @@ class RoleController extends Controller
     public function update(Role $role, Request $request)
     {
     	$role->update($request->input());
-        $role->permissions()->sync($request->input('permissions'));
+        $permissions = (null !== ($request->input('permissions'))) ? $request->input('permissions') : [];
+        $role->permissions()->sync($permissions);
     	return redirect('/admin/role');
     }
 
-    public function destroy(Permission $permission)
+    public function destroy(Role $role)
     {
-        $name = $permission->name;
-        $permission->delete();
+        $name = $role->name;
+        \App\User::where('role_id', $role->id)->update(['role_id'=>1]);
+        $role->delete();
         return $name;
     }
 }

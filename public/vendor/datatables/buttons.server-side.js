@@ -65,7 +65,7 @@
         className: 'buttons-reset',
 
         text: function (dt) {
-            return '<i class="fa fa-undo"></i> ' + dt.i18n('buttons.reset', 'Reset');
+            return '<i class="fa fa-undo"></i> ' + dt.i18n('buttons.reset', '重置');
         },
 
         action: function (e, dt, button, config) {

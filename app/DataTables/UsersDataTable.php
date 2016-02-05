@@ -29,14 +29,11 @@ class UsersDataTable extends DataTable
      */
     public function query()
     {
-                $users = User::select(['id', 'name', 'email', 'created_at']);
+
+        $users = User::select(['users.id', 'users.name', 'users.email', 'users.created_at', 'roles.name as role'])
+                    ->leftJoin('roles', 'roles.id', '=', 'users.role_id');
 
         return $users;
-
-        $users = User::leftJoin('roles', 'roles.id', '=', 'users.role_id')
-                    ->select(['users.id', 'users.name', 'users.email', 'users.created_at', 'roles.name as role']);
-
-        return $this->applyScopes($users);
 
     }
 
@@ -51,7 +48,7 @@ class UsersDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->addAction(['width' => '120px', 'title'=>'操作'])
-            ->parameters($this->getParameters());
+            ->parameters($this->getBuilderParameters());
     }
 
     /**
@@ -62,32 +59,15 @@ class UsersDataTable extends DataTable
     private function getColumns()
     {
         return [
-            'id'=>['title'=>'ID'],
-            'name'=>['title'=>'名字'],
+            'id'=>['title'=>'ID','name'=>'users.id'],
+            'name'=>['title'=>'名字', 'name'=>'users.name'],
             'email',
-            // 'role'=>[ 'title'=>'角色'],
-            'created_at'=>['title'=>'创建于']
+            'role'=>[ 'title'=>'角色', 'name'=>'roles.name'],
+            // 'role'=>[ 'title'=>'角色', 'searchable'=>false],
+            'created_at'=>['title'=>'创建于', 'name'=>'users.created_at']
         ];
     }
 
-    private function getParameters()
-    {
-        return array_merge(
-            $this->getBuilderParameters(),
-
-           [ "aoColumns"=> 
-               [
-               "bSearchable"=> false,
-
-                 "bSearchable"=> false,
-               "bSearchable"=> false,
-               "bSearchable"=> false,
- 
-              ]
-          ]
-
-            );
-    }
     /**
      * Get filename for export.
      *

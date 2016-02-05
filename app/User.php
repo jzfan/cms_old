@@ -35,8 +35,4 @@ class User extends Authenticatable
         return bcrypt($value);
     }
 
-    protected function getRoleIdAttribute($value)
-    {
-        return  empty($value) ? 1 : $value ;
-    }
 }

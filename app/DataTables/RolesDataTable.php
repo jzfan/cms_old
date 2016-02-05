@@ -16,8 +16,7 @@ class RolesDataTable extends DataTable
      */
     public function ajax()
     {
-        return $this->
-datatables
+        return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', 'admin.role.td')
             ->make(true);
@@ -30,17 +29,16 @@ datatables
      */
     public function query()
     {
-
-        $roles = Role::select([
-            'roles.id',
-            'roles.name',
-            \DB::raw('count(users.role_id) as count'),
-            // \DB::raw('count(permission_role.permission_id) as count2'),
-            'roles.created_at',
-            'roles.updated_at'
-        ])->leftJoin('users','users.role_id','=','roles.id')
-          // ->join('permission_role','permission_role.role_id','=','roles.id')
-        ->groupBy('users.role_id');
+        $roles = Role::with('users', 'permissions');
+        // $roles = Role::select([
+        //     'roles.id',
+        //     'roles.name',
+        //     \DB::raw('count(users.role_id) as count'),
+        //     \DB::raw('count(permission_role.permission_id) as count2'),
+        //     'roles.created_at',
+        // ])->leftJoin('users','users.role_id','=','roles.id')
+        //   ->leftJoin('permission_role','permission_role.role_id','=','roles.id')
+        // ->groupBy('users.role_id');
 
         return $this->applyScopes($roles);
     }
@@ -66,12 +64,11 @@ datatables
     private function getColumns()
     {
         return [
-            'id'=>['title'=>'ID'],
-            'name'=>['title'=>'名字'],
-            'count'=>['title'=>'人数'],
-            // 'count2'=>['title'=>'权限数'],
-            'created_at'=>['title'=>'创建于'],
-            'updated_at'=>['title'=>'更新于']
+            'id'=>['title'=>'ID', 'name'=>'roles.id'],
+            'name'=>['title'=>'名字', 'name'=>'roles.name'],
+            'users'=>['title'=>'人数', 'data'=>'users.length', 'searchable'=>false, 'orderable'=>false],
+            'permissions'=>['title'=>'权限数', 'data'=>'permissions.length', 'searchable'=>false, 'orderable'=>false],
+            'created_at'=>['title'=>'创建于', 'name'=>'roles.created_at']
         ];
     }
 

@@ -18,7 +18,7 @@ class PermissionsDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', 'admin.permission.td')
+            // ->addColumn('action', 'admin.permission.td')
             ->make(true);
     }
 
@@ -44,7 +44,7 @@ class PermissionsDataTable extends DataTable
     {
         return $this->builder()
                     ->columns($this->getColumns())
-                    ->addAction(['width' => '120px'])
+                    // ->addAction(['width' => '120px'])
                     ->parameters($this->getBuilderParameters());
     }
 
