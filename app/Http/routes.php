@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +24,23 @@ Route::get('/', function () {
 |
 */
 
+// Route::get('admin', function(){
+//     return 'aaaaaa';
+// });
+
 Route::group(['middleware' => 'web'], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
+
+    Route::get('admin/login', 'Auth\AdminController@getLogin');
+    Route::post('admin/login', 'Auth\AdminController@postLogin');
+    Route::get('admin/logout', 'Auth\AdminController@logout');
+    Route::get('admin/register', 'Auth\AdminController@getRegister');
+    Route::post('admin/register', 'Auth\AdminController@postRegister');
+    Route::get('admin', 'AdminController@index');   
 });
